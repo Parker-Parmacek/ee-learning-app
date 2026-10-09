@@ -272,6 +272,8 @@
     .module-btn { border:0; border-right:1px solid var(--line); background:transparent; padding:11px 14px; cursor:pointer; font:600 12px/1.2 "IBM Plex Mono", monospace; }
     .module-btn:last-child { border-right:0; }
     .module-btn[aria-selected="true"] { background:var(--ink); color:var(--bg); }
+    a.module-btn { text-decoration:none; display:inline-block; text-align:center; }
+    .tools-link { background:var(--amber); color:#141714; font-weight:700; }
     .module-shell { display:none; }
     .module-shell.active { display:block; }
     .logic-intro { display:grid; grid-template-columns:.8fr 1.2fr; gap:18px; align-items:start; }
@@ -1001,11 +1003,11 @@
         <button class="module-btn" role="tab" aria-selected="true" aria-controls="arcModule" data-module="arcModule">01 · ARC FLASH</button>
         <button class="module-btn" role="tab" aria-selected="false" aria-controls="booleanModule" data-module="booleanModule">02 · BOOLEAN</button>
         <button class="module-btn" role="tab" aria-selected="false" aria-controls="loadModule" data-module="loadModule">03 · LOADS</button>
-        <button class="module-btn" role="tab" aria-selected="false" aria-controls="mathModule" data-module="mathModule">04 · MATH TOOLS</button>
-        <button class="module-btn" role="tab" aria-selected="false" aria-controls="substationModule" data-module="substationModule">05 · SUBSTATIONS</button>
-        <button class="module-btn" role="tab" aria-selected="false" aria-controls="upsModule" data-module="upsModule">06 · UPS</button>
-        <button class="module-btn" role="tab" aria-selected="false" aria-controls="atsModule" data-module="atsModule">07 · ATS</button>
-        <button class="module-btn" role="tab" aria-selected="false" aria-controls="feModule" data-module="feModule">08 · FE PRACTICE</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="substationModule" data-module="substationModule">04 · SUBSTATIONS</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="upsModule" data-module="upsModule">05 · UPS</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="atsModule" data-module="atsModule">06 · ATS</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="feModule" data-module="feModule">07 · FE PRACTICE</button>
+        <a class="module-btn tools-link" href="https://parker-parmacek.github.io/ee-tools/">TOOLS ↗</a>
       </div>
     </div>
 
@@ -1671,188 +1673,6 @@
       <footer class="sources"><p>Boolean algebra is the foundation of digital logic. These diagrams use standard gate behavior and intentionally keep the circuits to their simplest form.</p></footer>
     </div>
 
-    <div class="module-shell" id="mathModule">
-      <div class="topline">
-        <div class="lesson-mark">
-          <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 3h16v18H4V3Zm3 3v4h10V6H7Zm0 7v2h2v-2H7Zm4 0v2h2v-2h-2Zm4 0v2h2v-2h-2Zm-8 4v2h2v-2H7Zm4 0v2h2v-2h-2Zm4 0v2h2v-2h-2Z"/></svg>
-          <span>Module 04 · Engineering math tools</span>
-        </div>
-        <span class="time">Quick estimates · Interactive</span>
-      </div>
-
-      <header class="hero">
-        <div>
-          <p class="eyebrow">MATH TOOLS / FIRST-PASS CHECKS</p>
-          <h1>Calculate first. Verify the design.</h1>
-          <p class="hero-copy">Keep calculation tools separate from the learning modules: estimate transformer fault current, convert electrical power, or check voltage drop across a circuit.</p>
-        </div>
-        <div class="hero-side" aria-label="Math tool objectives">
-          <div class="objective"><strong>Fault</strong><span>Estimate transformer-limited secondary current.</span></div>
-          <div class="objective"><strong>Power</strong><span>Calculate kW, kVA, and kVAR.</span></div>
-          <div class="objective"><strong>Voltage</strong><span>Check circuit drop against common design guidance.</span></div>
-        </div>
-      </header>
-
-      <div class="tabs-wrap">
-        <nav class="tabs" role="tablist" aria-label="Math tool sections" style="--tab-count:3">
-          <button class="tab" id="tab-infinite-bus" role="tab" aria-controls="infinite-bus" aria-selected="true" data-panel="infinite-bus">01 / INFINITE BUS</button>
-          <button class="tab" id="tab-power-calc" role="tab" aria-controls="power-calc" aria-selected="false" data-panel="power-calc">02 / POWER</button>
-          <button class="tab" id="tab-voltage-drop" role="tab" aria-controls="voltage-drop" aria-selected="false" data-panel="voltage-drop">03 / VOLTAGE DROP</button>
-        </nav>
-      </div>
-
-      <section class="panel active" id="infinite-bus" role="tabpanel" aria-labelledby="tab-infinite-bus">
-        <div class="section-head">
-          <h2>Infinite-bus fault current</h2>
-          <p>Estimate the maximum symmetrical RMS current supplied through a three-phase transformer when the primary source is treated as having zero impedance.</p>
-        </div>
-        <div class="calculator-stack">
-          <article class="card calculator-card">
-            <div class="calculator-brief">
-              <div class="step-num">WHY IT IS USED</div>
-              <h3>A fast upper-bound check</h3>
-              <p>The infinite-bus assumption removes upstream source impedance, leaving transformer impedance as the limiting element. Engineers use this first-pass estimate to screen secondary equipment interrupting ratings and to sanity-check a detailed short-circuit model.</p>
-              <h4>How to use it</h4>
-              <ol>
-                <li>Enter the transformer three-phase kVA rating.</li>
-                <li>Enter secondary line-to-line voltage.</li>
-                <li>Enter nameplate percent impedance.</li>
-                <li>Compare the result with—not in place of—a full system study.</li>
-              </ol>
-            </div>
-            <div class="calculator-form">
-              <div class="calc-input-grid">
-                <div class="calc-field"><label for="busKva">Transformer rating</label><div class="input-unit"><input id="busKva" type="number" min="1" step="1" value="1500" inputmode="decimal"><span>kVA</span></div></div>
-                <div class="calc-field"><label for="busVoltage">Secondary voltage L–L</label><div class="input-unit"><input id="busVoltage" type="number" min="1" step="1" value="480" inputmode="decimal"><span>V</span></div></div>
-                <div class="calc-field"><label for="busImpedance">Transformer impedance</label><div class="input-unit"><input id="busImpedance" type="number" min="0.01" max="100" step="0.01" value="5.75" inputmode="decimal"><span>% Z</span></div></div>
-              </div>
-              <div class="calc-results" aria-live="polite">
-                <div class="calc-result"><span>Full-load current</span><output id="busFlaOut">1,804 A</output></div>
-                <div class="calc-result"><span>Infinite-bus fault</span><output id="busFaultOut">31.37 kA</output></div>
-                <div class="calc-result"><span>Fault level</span><output id="busMvaOut">26.09 MVA</output></div>
-              </div>
-              <div class="calc-equation"><strong>I<sub>FL</sub> = kVA × 1000 ÷ (√3 × V<sub>LL</sub>)</strong><br><strong>I<sub>SC</sub> = I<sub>FL</sub> ÷ (Z% ÷ 100)</strong></div>
-              <div class="calc-warning"><strong>Assumption boundary:</strong> this is the transformer contribution at its secondary terminals with an infinite primary bus and rated voltage. It ignores utility/source impedance, conductor impedance, taps, impedance tolerance, motor contribution, and other sources. Do not use it alone to specify equipment or produce labels.</div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" id="power-calc" role="tabpanel" aria-labelledby="tab-power-calc">
-        <div class="section-head">
-          <h2>AC power calculator</h2>
-          <p>Convert RMS voltage, current, and power factor into apparent, real, and reactive power for balanced three-phase or single-phase loads.</p>
-        </div>
-        <article class="card calculator-card">
-          <div class="calculator-brief">
-            <div class="step-num">WHY IT IS USED</div>
-            <h3>Translate load current into power</h3>
-            <p>This calculation is useful for quick load checks, equipment sizing conversations, and comparing the kW doing useful work with the kVA carried by conductors and equipment.</p>
-            <h4>How to use it</h4>
-            <ol>
-              <li>Select balanced three-phase or single-phase.</li>
-              <li>For three-phase, enter line-to-line voltage and line current.</li>
-              <li>Enter power factor from 0 to 1.</li>
-              <li>Read kW, kVA, and kVAR together.</li>
-            </ol>
-          </div>
-          <div class="calculator-form">
-            <div class="phase-select" role="group" aria-label="Power system phase">
-              <button class="phase-btn" type="button" data-phase="three" aria-pressed="true">THREE-PHASE</button>
-              <button class="phase-btn" type="button" data-phase="single" aria-pressed="false">SINGLE-PHASE</button>
-            </div>
-            <div class="calc-input-grid">
-              <div class="calc-field"><label id="powerVoltageLabel" for="powerVoltage">Line-to-line voltage</label><div class="input-unit"><input id="powerVoltage" type="number" min="0" step="1" value="480" inputmode="decimal"><span>V</span></div></div>
-              <div class="calc-field"><label for="powerCurrent">Line current</label><div class="input-unit"><input id="powerCurrent" type="number" min="0" step="0.1" value="120" inputmode="decimal"><span>A</span></div></div>
-              <div class="calc-field"><label for="powerFactor">Power factor</label><div class="input-unit"><input id="powerFactor" type="number" min="0" max="1" step="0.01" value="0.90" inputmode="decimal"><span>PF</span></div></div>
-            </div>
-            <div class="calc-results" aria-live="polite">
-              <div class="calc-result"><span>Real power</span><output id="powerKwOut">89.79 kW</output></div>
-              <div class="calc-result"><span>Apparent power</span><output id="powerKvaOut">99.77 kVA</output></div>
-              <div class="calc-result"><span>Reactive power</span><output id="powerKvarOut">43.49 kVAR</output></div>
-            </div>
-            <div class="calc-equation" id="powerEquation"><strong>S = √3 × V<sub>LL</sub> × I ÷ 1000</strong><br>P = S × PF &nbsp;·&nbsp; Q = S × √(1 − PF²)</div>
-            <div class="calc-warning"><strong>Balanced-load calculation:</strong> the three-phase mode assumes equal phase currents and uses line-to-line voltage. The sign of reactive power is not inferred; the calculator reports its magnitude from the entered power factor.</div>
-          </div>
-        </article>
-      </section>
-
-      <section class="panel" id="voltage-drop" role="tabpanel" aria-labelledby="tab-voltage-drop">
-        <div class="section-head">
-          <h2>Voltage drop lab</h2>
-          <p>This teaching estimate uses copper conductor circular-mil area and a one-way circuit length. Choose a distribution system, then try one slider at a time to isolate its effect.</p>
-        </div>
-
-        <div class="vd-lab">
-          <article class="card vd-visual">
-            <div class="vd-visual-head">
-              <div><h3>Source-to-load voltage</h3><p id="vdScenarioLabel">480 V · Three-phase · Copper</p></div>
-              <div class="vd-reading"><output id="vdPercentOut">—</output><span>estimated voltage drop</span></div>
-            </div>
-
-            <div class="vd-path" aria-label="Voltage drop from source to load">
-              <div class="vd-path-line">
-                <div class="vd-node"><span>SOURCE<br><strong id="vdSourceOut">480 V</strong></span></div>
-                <div class="vd-conductor"><span id="vdPathLabel">200 ft · #4 Cu</span></div>
-                <div class="vd-node"><span>LOAD<br><strong id="vdReceiveOut">—</strong></span></div>
-              </div>
-            </div>
-
-            <div class="vd-meter" aria-label="Voltage drop recommendation scale from zero to eight percent">
-              <div class="vd-meter-track"><span class="vd-zone good"></span><span class="vd-zone caution"></span><span class="vd-zone high"></span><i class="vd-marker" id="vdMarker"></i></div>
-              <div class="vd-meter-labels"><span>0%</span><span class="three">3%</span><span class="five">5%</span><span>8%+</span></div>
-            </div>
-
-            <div class="vd-stats" aria-live="polite">
-              <div class="vd-stat"><span>Drop</span><strong id="vdVoltsOut">—</strong></div>
-              <div class="vd-stat"><span>Receiving voltage</span><strong id="vdReceivingOut">—</strong></div>
-              <div class="vd-stat"><span>Conductor area</span><strong id="vdAreaOut">—</strong></div>
-            </div>
-          </article>
-
-          <aside class="card vd-controls">
-            <div class="control-group">
-              <div class="control-head"><label for="vdVoltage">Distribution system</label></div>
-              <select class="vd-voltage-select" id="vdVoltage">
-                <option value="120" data-phase="single">120 V · single-phase</option>
-                <option value="240" data-phase="single">120/240 V · single-phase</option>
-                <option value="208" data-phase="three">208Y/120 V · three-phase</option>
-                <option value="240" data-phase="three">240 V Δ · three-phase</option>
-                <option value="480" data-phase="three" selected>480Y/277 V · three-phase</option>
-                <option value="600" data-phase="three">600Y/347 V · three-phase</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <div class="control-head"><label for="vdDistance">One-way distance</label><span class="control-value" id="vdDistanceValue">200 ft</span></div>
-              <input id="vdDistance" type="range" min="10" max="500" step="5" value="200">
-              <div class="range-scale"><span>10 ft</span><span>500 ft</span></div>
-            </div>
-            <div class="control-group">
-              <div class="control-head"><label for="vdLoad">Load current</label><span class="control-value" id="vdLoadValue">150 A</span></div>
-              <input id="vdLoad" type="range" min="5" max="400" step="5" value="150">
-              <div class="range-scale"><span>5 A</span><span>400 A</span></div>
-            </div>
-            <div class="control-group">
-              <div class="control-head"><label for="vdSize">Copper conductor</label><span class="control-value" id="vdSizeValue">#4 AWG</span></div>
-              <input id="vdSize" type="range" min="0" max="17" step="1" value="5">
-              <div class="range-scale"><span>#14 AWG</span><span>500 kcmil</span></div>
-            </div>
-
-            <div class="vd-status" id="vdStatus" data-state="caution" aria-live="polite"><strong id="vdStatusTitle">—</strong><p id="vdStatusCopy">—</p></div>
-          </aside>
-        </div>
-
-        <div class="vd-lessons">
-          <article class="card vd-note"><code>WHAT THE CONTROLS TEACH</code><h3>Longer and heavier means more drop</h3><p>Voltage drop rises in direct proportion to one-way distance and load current. Increasing conductor circular-mil area pushes it down. System voltage does not change drop volts in this simplified current-based model, but a higher source voltage makes the same drop a smaller percentage.</p></article>
-          <article class="card vd-note"><code>NEC RECOMMENDATION</code><h3>Use 3% and 5% as design checks</h3><p>NEC informational notes commonly recommend limiting voltage drop to about 3% on a feeder or branch circuit and about 5% total across feeder plus branch circuit to the farthest outlet.</p><p>These are general design recommendations, not a substitute for mandatory limits that apply to certain equipment or installations.</p></article>
-        </div>
-
-        <div class="formula"><b>Single-phase: V<sub>D</sub> = 2 × K × I × L ÷ CM</b><br><b>Three-phase: V<sub>D</sub> = √3 × K × I × L ÷ CM</b><br>K = 12.9 Ω·cmil/ft for this copper teaching estimate · L = one-way length · CM = conductor area in circular mils</div>
-      </section>
-
-      <footer class="sources"><p>These math tools provide approximate first-pass results. Confirm system configuration, conductor data, units, source information, equipment ratings, and applicable engineering standards before making design or safety decisions.</p></footer>
-    </div>
-
     <div class="module-shell" id="loadModule">
       <div class="topline">
         <div class="lesson-mark">
@@ -2013,7 +1833,7 @@
       <div class="topline">
         <div class="lesson-mark">
           <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18v3H3V5Zm2 6h14v8H5v-8Zm3 2v4h2v-4H8Zm6 0v4h2v-4h-2Z"/></svg>
-          <span>Module 05 · Substations</span>
+          <span>Module 04 · Substations</span>
         </div>
         <span class="time">25 min · One-line simulator</span>
       </div>
@@ -2199,7 +2019,7 @@
       <div class="topline">
         <div class="lesson-mark">
           <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10v4h2v16H5V6h2V2Zm2 2v2h6V4H9Zm-2 4v12h10V8H7Zm5 2-3 5h2l-1 3 4-6h-2l1-2h-1Z"/></svg>
-          <span>Module 06 · UPS Systems</span>
+          <span>Module 05 · UPS Systems</span>
         </div>
         <span class="time">25 min · Power-path lab</span>
       </div>
@@ -2278,7 +2098,7 @@
       <div class="topline">
         <div class="lesson-mark">
           <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 3h6v4H7v4h7V7h-3l5-5v4h4v6h-4V9h-2v8h3l-5 5v-4H4v-6h3v3h4v-2H4V3Z"/></svg>
-          <span>Module 07 · Automatic Transfer Switches</span>
+          <span>Module 06 · Automatic Transfer Switches</span>
         </div>
         <span class="time">25 min · Sequence simulator</span>
       </div>
@@ -2318,7 +2138,7 @@
       <div class="topline">
         <div class="lesson-mark">
           <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 1 5 13h6l-1 10 9-14h-6l.5-8Z"/></svg>
-          <span>Module 08 · FE Electrical &amp; Computer</span>
+          <span>Module 07 · FE Electrical &amp; Computer</span>
         </div>
         <span class="time">5 min · Section drills</span>
       </div>
@@ -2501,6 +2321,7 @@
       var moduleShells = Array.from(document.querySelectorAll('.module-shell'));
       moduleButtons.forEach(function (button) {
         button.addEventListener('click', function () {
+          if (!button.dataset.module) return; // external link (e.g. Tools app)
           moduleButtons.forEach(function (b) { b.setAttribute('aria-selected', 'false'); });
           moduleShells.forEach(function (shell) { shell.classList.remove('active'); });
           button.setAttribute('aria-selected', 'true');
@@ -3027,134 +2848,6 @@
         document.getElementById('logicProgressFill').style.width = '0%'; document.getElementById('logicAnsweredStat').textContent = '0 answered'; document.getElementById('logicScoreStat').textContent = '0 correct'; renderLogicQuestion();
       });
       renderLogicQuestion();
-
-      var busKva = document.getElementById('busKva');
-      var busVoltage = document.getElementById('busVoltage');
-      var busImpedance = document.getElementById('busImpedance');
-      function finitePositive(input) {
-        var value = parseFloat(input.value);
-        return Number.isFinite(value) && value > 0 ? value : null;
-      }
-      function updateInfiniteBus() {
-        var kva = finitePositive(busKva);
-        var voltage = finitePositive(busVoltage);
-        var impedance = finitePositive(busImpedance);
-        var flaOut = document.getElementById('busFlaOut');
-        var faultOut = document.getElementById('busFaultOut');
-        var mvaOut = document.getElementById('busMvaOut');
-        if (kva === null || voltage === null || impedance === null) {
-          flaOut.textContent = '—'; faultOut.textContent = '—'; mvaOut.textContent = '—'; return;
-        }
-        var fla = kva * 1000 / (Math.sqrt(3) * voltage);
-        var faultAmps = fla / (impedance / 100);
-        var faultMva = Math.sqrt(3) * voltage * faultAmps / 1000000;
-        flaOut.textContent = Math.round(fla).toLocaleString() + ' A';
-        faultOut.textContent = (faultAmps / 1000).toFixed(2) + ' kA';
-        mvaOut.textContent = faultMva.toFixed(2) + ' MVA';
-      }
-      [busKva, busVoltage, busImpedance].forEach(function (input) { input.addEventListener('input', updateInfiniteBus); });
-      updateInfiniteBus();
-
-      var powerPhase = 'three';
-      var powerVoltage = document.getElementById('powerVoltage');
-      var powerCurrent = document.getElementById('powerCurrent');
-      var powerFactor = document.getElementById('powerFactor');
-      var phaseButtons = Array.from(document.querySelectorAll('.phase-btn[data-phase]'));
-      function updatePower() {
-        var voltage = parseFloat(powerVoltage.value);
-        var currentAmps = parseFloat(powerCurrent.value);
-        var pf = parseFloat(powerFactor.value);
-        var kwOut = document.getElementById('powerKwOut');
-        var kvaOut = document.getElementById('powerKvaOut');
-        var kvarOut = document.getElementById('powerKvarOut');
-        if (!Number.isFinite(voltage) || voltage < 0 || !Number.isFinite(currentAmps) || currentAmps < 0 || !Number.isFinite(pf) || pf < 0 || pf > 1) {
-          kwOut.textContent = '—'; kvaOut.textContent = '—'; kvarOut.textContent = '—'; return;
-        }
-        var phaseFactor = powerPhase === 'three' ? Math.sqrt(3) : 1;
-        var kva = phaseFactor * voltage * currentAmps / 1000;
-        var kw = kva * pf;
-        var kvar = kva * Math.sqrt(Math.max(0, 1 - pf * pf));
-        kwOut.textContent = kw.toFixed(2) + ' kW';
-        kvaOut.textContent = kva.toFixed(2) + ' kVA';
-        kvarOut.textContent = kvar.toFixed(2) + ' kVAR';
-      }
-      phaseButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          powerPhase = button.dataset.phase;
-          phaseButtons.forEach(function (item) { item.setAttribute('aria-pressed', item === button ? 'true' : 'false'); });
-          document.getElementById('powerVoltageLabel').textContent = powerPhase === 'three' ? 'Line-to-line voltage' : 'Voltage';
-          document.getElementById('powerEquation').innerHTML = powerPhase === 'three'
-            ? '<strong>S = √3 × V<sub>LL</sub> × I ÷ 1000</strong><br>P = S × PF &nbsp;·&nbsp; Q = S × √(1 − PF²)'
-            : '<strong>S = V × I ÷ 1000</strong><br>P = S × PF &nbsp;·&nbsp; Q = S × √(1 − PF²)';
-          updatePower();
-        });
-      });
-      [powerVoltage, powerCurrent, powerFactor].forEach(function (input) { input.addEventListener('input', updatePower); });
-      updatePower();
-
-      var vdPhase = 'three';
-      var vdVoltage = document.getElementById('vdVoltage');
-      var vdDistance = document.getElementById('vdDistance');
-      var vdLoad = document.getElementById('vdLoad');
-      var vdSize = document.getElementById('vdSize');
-      var vdConductors = [
-        { label:'#14 AWG', short:'#14', cm:4110 }, { label:'#12 AWG', short:'#12', cm:6530 },
-        { label:'#10 AWG', short:'#10', cm:10380 }, { label:'#8 AWG', short:'#8', cm:16510 },
-        { label:'#6 AWG', short:'#6', cm:26240 }, { label:'#4 AWG', short:'#4', cm:41740 },
-        { label:'#3 AWG', short:'#3', cm:52620 }, { label:'#2 AWG', short:'#2', cm:66360 },
-        { label:'#1 AWG', short:'#1', cm:83690 }, { label:'1/0 AWG', short:'1/0', cm:105600 },
-        { label:'2/0 AWG', short:'2/0', cm:133100 }, { label:'3/0 AWG', short:'3/0', cm:167800 },
-        { label:'4/0 AWG', short:'4/0', cm:211600 }, { label:'250 kcmil', short:'250 kcmil', cm:250000 },
-        { label:'300 kcmil', short:'300 kcmil', cm:300000 }, { label:'350 kcmil', short:'350 kcmil', cm:350000 },
-        { label:'400 kcmil', short:'400 kcmil', cm:400000 }, { label:'500 kcmil', short:'500 kcmil', cm:500000 }
-      ];
-      function updateVoltageDrop() {
-        var selectedSystem = vdVoltage.options[vdVoltage.selectedIndex];
-        var voltage = parseFloat(selectedSystem.value);
-        vdPhase = selectedSystem.dataset.phase;
-        var feet = parseFloat(vdDistance.value);
-        var amps = parseFloat(vdLoad.value);
-        var conductor = vdConductors[parseInt(vdSize.value, 10)];
-        var phaseFactor = vdPhase === 'three' ? Math.sqrt(3) : 2;
-        var dropVolts = phaseFactor * 12.9 * amps * feet / conductor.cm;
-        var dropPercent = dropVolts / voltage * 100;
-        var receive = Math.max(0, voltage - dropVolts);
-        var displayPercent = dropPercent < 10 ? dropPercent.toFixed(2) : dropPercent.toFixed(1);
-        document.getElementById('vdPercentOut').textContent = displayPercent + '%';
-        document.getElementById('vdVoltsOut').textContent = dropVolts.toFixed(dropVolts < 10 ? 2 : 1) + ' V';
-        document.getElementById('vdReceiveOut').textContent = receive.toFixed(1) + ' V';
-        document.getElementById('vdReceivingOut').textContent = receive.toFixed(1) + ' V';
-        document.getElementById('vdAreaOut').textContent = conductor.cm.toLocaleString() + ' cmil';
-        document.getElementById('vdSourceOut').textContent = voltage.toFixed(0) + ' V';
-        document.getElementById('vdPathLabel').textContent = feet.toFixed(0) + ' ft · ' + conductor.short + ' Cu';
-        document.getElementById('vdScenarioLabel').textContent = selectedSystem.textContent + ' · Copper';
-        document.getElementById('vdDistanceValue').textContent = feet.toFixed(0) + ' ft';
-        document.getElementById('vdLoadValue').textContent = amps.toFixed(0) + ' A';
-        document.getElementById('vdSizeValue').textContent = conductor.label;
-        document.getElementById('vdMarker').style.left = Math.min(100, Math.max(0, dropPercent / 8 * 100)) + '%';
-        var status = document.getElementById('vdStatus');
-        var title = document.getElementById('vdStatusTitle');
-        var copy = document.getElementById('vdStatusCopy');
-        if (dropPercent <= 3) {
-          status.dataset.state = 'good';
-          title.textContent = 'Within the 3% recommendation';
-          copy.textContent = 'This circuit estimate leaves ' + (3 - dropPercent).toFixed(2) + ' percentage points before 3%.';
-          document.getElementById('vdPercentOut').style.color = '#54c59e';
-        } else if (dropPercent <= 5) {
-          status.dataset.state = 'caution';
-          title.textContent = 'Above 3% · below 5%';
-          copy.textContent = 'This one circuit uses more than the usual 3% allowance. Check the combined feeder-and-branch total.';
-          document.getElementById('vdPercentOut').style.color = '#f3aa2a';
-        } else {
-          status.dataset.state = 'high';
-          title.textContent = 'Above the 5% combined recommendation';
-          copy.textContent = 'Reduce length or current, increase conductor size, or revisit the system voltage and circuit arrangement.';
-          document.getElementById('vdPercentOut').style.color = '#ff6a4d';
-        }
-      }
-      vdVoltage.addEventListener('change', updateVoltageDrop);
-      [vdDistance, vdLoad, vdSize].forEach(function (input) { input.addEventListener('input', updateVoltageDrop); });
-      updateVoltageDrop();
 
       var panelLoads = [
         { name:'Office lighting', va:12000, qty:1, demand:100, continuous:true },
