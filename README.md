@@ -1,6 +1,6 @@
 # EE Learning App
 
-Interactive electrical engineering learning web app — a portfolio project by Parker Parmacek, Electrical Engineer II.
+Interactive electrical engineering learning web app — a personal project by Parker Parmacek.
 
 ## Modules
 
