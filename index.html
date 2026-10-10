@@ -1007,6 +1007,8 @@
         <button class="module-btn" role="tab" aria-selected="false" aria-controls="upsModule" data-module="upsModule">05 · UPS</button>
         <button class="module-btn" role="tab" aria-selected="false" aria-controls="atsModule" data-module="atsModule">06 · ATS</button>
         <button class="module-btn" role="tab" aria-selected="false" aria-controls="feModule" data-module="feModule">07 · FE PRACTICE</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="sdsModule" data-module="sdsModule">08 · SEPARATELY DERIVED</button>
+        <button class="module-btn" role="tab" aria-selected="false" aria-controls="tccModule" data-module="tccModule">09 · TCC CURVES</button>
         <a class="module-btn tools-link" href="https://parker-parmacek.github.io/ee-tools/">TOOLS ↗</a>
       </div>
     </div>
@@ -2200,6 +2202,155 @@
       </section>
 
       <footer class="sources"><p>These are original practice questions written for study drills. They are not copied from, endorsed by, or official questions from NCEES or any prep provider. Use the current NCEES handbook and exam specification as the controlling references.</p></footer>
+    </div>
+
+    <div class="module-shell" id="sdsModule">
+      <div class="topline">
+        <div class="lesson-mark">
+          <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 2 5 13h5l-1 9 8-12h-5l1-8Z"/></svg>
+          <span>Module 08 · Separately Derived Systems</span>
+        </div>
+        <span class="time">30 min · Fault-path simulator</span>
+      </div>
+
+      <header class="hero">
+        <div><p class="eyebrow">GROUNDING &amp; BONDING / NEC 250.30</p><h1>Give every system its own path home.</h1><p class="hero-copy">A transformer or generator creates a brand-new electrical system. Learn what makes it &ldquo;separately derived,&rdquo; where its one neutral-to-ground bond goes, and why a ground fault is harmless or deadly depending on that single connection.</p></div>
+        <div class="hero-side" aria-label="SDS module objectives"><div class="objective"><strong>Define</strong><span>Recognize separately derived systems: transformers, generators, inverters.</span></div><div class="objective"><strong>Bond</strong><span>Place the one system bonding jumper that creates the fault path.</span></div><div class="objective"><strong>Prove</strong><span>Fault the secondary and watch the breaker trip — or not.</span></div></div>
+      </header>
+
+      <div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Separately derived systems module sections" style="--tab-count:3"><button class="tab" id="tab-sds-learn" role="tab" aria-controls="sds-learn" aria-selected="true" data-panel="sds-learn">01 / LEARN</button><button class="tab" id="tab-sds-explore" role="tab" aria-controls="sds-explore" aria-selected="false" data-panel="sds-explore">02 / EXPLORE</button><button class="tab" id="tab-sds-quiz" role="tab" aria-controls="sds-quiz" aria-selected="false" data-panel="sds-quiz">03 / QUIZ</button></nav></div>
+
+      <section class="panel active" id="sds-learn" role="tabpanel" aria-labelledby="tab-sds-learn">
+        <div class="section-head"><h2>A transformer makes a new world</h2><p>The secondary of a transformer has no electrical connection to the primary — power crosses by magnetism, not copper. Until you bond its neutral to ground, that whole system floats with no fault reference at all.</p></div>
+        <div class="power-principles"><article class="card power-principle"><code>SEPARATELY DERIVED</code><h3>A new source, a new system</h3><div class="power-flow"><span>SERVICE</span><i>&ne;</i><span>XFMR</span><i>&ne;</i><span>GEN</span></div><p>A separately derived system is premises wiring whose power comes from a source other than the service, with no direct conductor-to-conductor connection to any other system — except through earth, metal enclosures, raceways, or equipment grounding conductors. The secondary doesn&rsquo;t &ldquo;know&rdquo; the primary&rsquo;s ground reference until you give it one.</p></article><article class="card power-principle"><code>SYSTEM BONDING JUMPER</code><h3>The one deliberate bond</h3><div class="power-flow"><span>X0</span><i>&mdash;</i><span>SBJ</span><i>&mdash;</i><span>EGC</span></div><p>The system bonding jumper connects the grounded (neutral) conductor to the equipment grounding conductor — at the source or the first disconnecting means. It creates the low-impedance ground-fault return path that lets the breaker see a fault and trip. No jumper, no path, no trip.</p></article><article class="card power-principle"><code>ONE BOND ONLY</code><h3>Bond twice, share current</h3><div class="power-flow"><span>XFMR</span><i>&#8741;</i><span>PANEL</span><i>&rarr;</i><span>&#8741; PATHS</span></div><p>A second neutral-to-ground bond — say, at the transformer and again at the panel — puts the neutral and the EGC in parallel. Normal neutral current splits across both, and current flowing on the equipment grounding conductor is the &ldquo;objectionable current&rdquo; of NEC 250.6.</p></article></div>
+        <div class="depth-grid"><article class="depth-card"><code>EXAMPLES</code><h3>Where SDSs show up</h3><p>Transformers (the classic case), generators, battery and inverter systems, PV systems, and motor-generator sets. If the source creates its own neutral with no conductor tie back to the service, it is separately derived.</p></article><article class="depth-card"><code>GEC SIZING</code><h3>Size it like a service</h3><p>The grounding electrode conductor lands at the same location as the system bonding jumper and is sized from Table 250.66, based on the largest ungrounded (phase) conductor of the derived system.</p></article><article class="depth-card"><code>COMMON GEC</code><h3>One electrode, many systems</h3><p>Multiple separately derived systems may share a single common grounding electrode conductor, sized for the largest derived phase conductors among them — 250.30(A)(6).</p></article><article class="depth-card"><code>UNGROUNDED SDS</code><h3>No neutral bond at all</h3><p>Some systems run ungrounded or impedance-grounded. They still get a grounding electrode conductor tying the EGC to earth, and ungrounded systems need ground detection per 250.21(B) — because the first ground fault is silent.</p></article><article class="depth-card"><code>JUMPER LOCATION</code><h3>Source or first disconnect</h3><p>Install the system bonding jumper at the source. If that is impractical, it goes at the first disconnecting means instead. Either way: one jumper, one location, sized to carry the fault.</p></article><article class="depth-card"><code>FAULT CLEARING</code><h3>Why the bond is safety</h3><p>Overcurrent devices only trip on current they can see. The bonding jumper completes the fault loop back to the source winding — without it, a bolted ground fault draws almost nothing, and the breaker sits closed while metal stays energized.</p></article></div>
+      </section>
+
+      <section class="panel" id="sds-explore" role="tabpanel" aria-labelledby="tab-sds-explore">
+        <div class="section-head"><h2>Fault the secondary</h2><p>This 480&Delta;&ndash;208Y/120&nbsp;V transformer is a separately derived system. Use the two buttons: remove the bonding jumper, then apply a ground fault at the load — and watch what the breaker does.</p></div>
+        <div class="system-grid"><article class="card system-board"><div class="system-board-head"><div><h3>Separately derived system one-line</h3><p>Utility &middot; transformer &middot; panelboard &middot; load</p></div><div class="system-state" id="sdsState" data-state="normal" aria-live="polite"><span>SYSTEM STATE</span><strong id="sdsStateText">System normal</strong></div></div>
+          <svg class="power-one-line" viewBox="0 0 820 380" role="img" aria-labelledby="sdsLineTitle sdsLineDesc"><title id="sdsLineTitle">Interactive separately derived system one-line</title><desc id="sdsLineDesc">A delta-wye transformer feeds a panelboard and load. The neutral X0 connects through a system bonding jumper to the equipment grounding system and a grounding electrode.</desc><path id="sdsFeedPath" class="path live" d="M116 180H228"/><path id="sdsXfmrPath" class="path live" d="M380 180H498"/><path id="sdsLoadPath" class="path live" d="M630 180H714"/><path id="sdsNeutralPath" class="path" d="M304 242V296H564V242"/><path id="sdsGroundBus" class="path" d="M268 332H756"/><path id="sdsEgcPanel" class="path" d="M564 242V332"/><path id="sdsEgcLoad" class="path" d="M756 210V332"/><path id="sdsGecPath" class="path" d="M440 332V356"/><path id="sdsSbjPath" class="path live" d="M304 296V332"/><path id="sdsFaultPath" class="path" d="M690 180V332" style="display:none"/><rect id="sdsUtilBlock" class="block live" x="24" y="150" width="92" height="60"/><rect id="sdsXfmrBlock" class="block live" x="228" y="118" width="152" height="124"/><rect id="sdsBreaker" class="block live" x="427" y="168" width="26" height="24"/><rect id="sdsPanelBlock" class="block live" x="498" y="118" width="132" height="124"/><rect id="sdsLoadBlock" class="block live" x="714" y="150" width="82" height="60"/><circle id="sdsX0" cx="304" cy="242" r="6" fill="#ffe457"/><g class="node-label"><text x="70" y="177">UTILITY</text><text x="70" y="194">480 V 3&Oslash;</text><text x="304" y="150">XFMR</text><text x="304" y="167">&Delta;&ndash;Y</text><text x="304" y="184">480&ndash;208Y/120</text><text x="564" y="150">PANEL</text><text x="564" y="167">208Y/120 V</text><text x="755" y="177">LOAD</text><text x="755" y="194">120 V</text></g><g class="small-label"><text x="304" y="262">X0</text><text x="322" y="318">SBJ</text><text x="456" y="350">GEC</text><text x="586" y="292">EGC</text><text x="690" y="168">FAULT</text></g><g stroke="#d7ddd5" stroke-width="3" stroke-linecap="round"><line x1="420" y1="360" x2="460" y2="360"/><line x1="428" y1="366" x2="452" y2="366"/><line x1="436" y1="372" x2="444" y2="372"/></g></svg>
+          <div class="power-readouts"><div class="power-readout"><span>Bonding jumper</span><strong id="sdsSbjOut">Installed</strong></div><div class="power-readout"><span>Ground fault</span><strong id="sdsFaultOut">None</strong></div><div class="power-readout"><span>Panel breaker</span><strong id="sdsBreakerOut">Closed</strong></div><div class="power-readout"><span>Load enclosure</span><strong id="sdsEnclosureOut">Safe</strong></div></div></article>
+          <aside class="system-side"><div class="card system-controls"><h3>System actions</h3><p>Two buttons, one lesson. The graphic stays put while you work.</p><div class="sequence-controls"><button class="sequence-btn primary" id="sdsSbjBtn" type="button">Remove bonding jumper</button><button class="sequence-btn" id="sdsFaultBtn" type="button">Apply ground fault</button></div><div class="system-note" id="sdsActionNote"><strong>The one deliberate bond:</strong> the system bonding jumper ties the transformer neutral (X0) to the equipment grounding conductor. Try removing it, then applying a ground fault.</div></div><div class="card system-guide"><h3>Reading the diagram</h3><ol class="sequence-steps"><li><strong>Yellow paths</strong> carry current; gray paths are idle.</li><li><strong>SBJ</strong> is the only neutral-to-ground bond in the system.</li><li><strong>GEC</strong> runs from the ground bus to the electrode.</li><li><strong>EGC</strong> risers bond the panel and load enclosures.</li></ol></div></aside></div>
+        <aside class="callout"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 21h22L12 2Zm1 14h-2V9h2v7Zm0 3h-2v-2h2v2Z"/></svg><div><strong>The primary breaker can&rsquo;t save you</strong><p>A ground fault on the secondary circulates only inside the secondary system. The primary-side breaker sees it as ordinary load current reflected through the turns ratio and will not trip on it. Each system protects itself.</p></div></aside>
+      </section>
+
+      <section class="panel" id="sds-quiz" role="tabpanel" aria-labelledby="tab-sds-quiz">
+        <div class="section-head"><h2>Check the bond</h2><p>Six questions on definitions, the bonding jumper, fault behavior, and sizing.</p></div>
+        <div class="quiz-shell">
+          <div class="card quiz-card">
+            <div id="sdsQuestionView">
+              <div class="quiz-kicker" id="sdsQuizKicker">QUESTION 01 / 06</div>
+              <h3 class="quiz-question" id="sdsQuestionText"></h3>
+              <div class="answers" id="sdsAnswers"></div>
+              <div class="feedback" id="sdsFeedback"><strong id="sdsFeedbackTitle"></strong><p id="sdsFeedbackText"></p><button class="next-btn" id="sdsNextBtn">Next question</button></div>
+            </div>
+            <div class="results" id="sdsResults" hidden>
+              <div class="score-ring" id="sdsScoreRing"><strong id="sdsFinalScore">0/6</strong></div>
+              <h3 id="sdsResultTitle">Module complete</h3><p id="sdsResultCopy"></p>
+              <button class="restart-btn" id="sdsRestartBtn">Try again</button>
+            </div>
+          </div>
+          <aside class="card quiz-rail">
+            <h3>Knowledge check</h3>
+            <div class="progress-track"><div class="progress-fill" id="sdsProgressFill"></div></div>
+            <div class="quiz-stats"><span id="sdsAnsweredStat">0 answered</span><span id="sdsScoreStat">0 correct</span></div>
+            <div class="dots" id="sdsDots" aria-label="Separately derived systems quiz progress"></div>
+          </aside>
+        </div>
+      </section>
+      <footer class="sources"><p>This module is an educational overview of NEC Article 250 grounding and bonding concepts for separately derived systems, not a complete Code treatment. Apply the adopted NEC edition, local amendments, and qualified engineering judgment on real projects.</p></footer>
+    </div>
+
+    <div class="module-shell" id="tccModule">
+      <div class="topline">
+        <div class="lesson-mark">
+          <svg class="bolt-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 20V4h16v2H6v14H4Z"/></svg>
+          <span>Module 09 · Time-Current Curves</span>
+        </div>
+        <span class="time">35 min · Curve explorer</span>
+      </div>
+
+      <header class="hero">
+        <div><p class="eyebrow">PROTECTION / TCC FUNDAMENTALS</p><h1>Read the curve, know the trip.</h1><p class="hero-copy">Every protective device carries its personality on a log-log plot: long-time for overloads, short-time for selectivity, instantaneous for raw self-defense. Learn what each region does, how its pickup is set, and how to pull a clearing time off the curve.</p></div>
+        <div class="hero-side" aria-label="TCC module objectives"><div class="objective"><strong>Read</strong><span>Turn any point on a TCC into a trip time.</span></div><div class="objective"><strong>Set</strong><span>Dial pickups and delays and watch the curve reshape.</span></div><div class="objective"><strong>Clear</strong><span>Convert curve time into total clearing time.</span></div></div>
+      </header>
+
+      <div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="TCC module sections" style="--tab-count:3"><button class="tab" id="tab-tcc9-learn" role="tab" aria-controls="tcc9-learn" aria-selected="true" data-panel="tcc9-learn">01 / LEARN</button><button class="tab" id="tab-tcc9-explore" role="tab" aria-controls="tcc9-explore" aria-selected="false" data-panel="tcc9-explore">02 / EXPLORE</button><button class="tab" id="tab-tcc9-quiz" role="tab" aria-controls="tcc9-quiz" aria-selected="false" data-panel="tcc9-quiz">03 / QUIZ</button></nav></div>
+
+      <section class="panel active" id="tcc9-learn" role="tabpanel" aria-labelledby="tab-tcc9-learn">
+        <div class="section-head"><h2>The device's whole personality, on one plot</h2><p>A time-current characteristic curve answers one question for every possible current: how long until this device trips? Three protection functions share the plot, each owning a current range.</p></div>
+        <div class="power-principles"><article class="card power-principle"><code>HOW TO READ</code><h3>Current across, time up</h3><div class="power-flow"><span>AMPS</span><i>&rarr;</i><span>CURVE</span><i>&rarr;</i><span>SECONDS</span></div><p>Pick a current on the log horizontal axis, rise to the device curve, read time off the log vertical axis. Because both axes are logarithmic, a small nudge in current can mean a huge swing in time — that compression is the whole game.</p></article><article class="card power-principle"><code>CLEARING TIME</code><h3>Curve time is not the whole story</h3><div class="power-flow"><span>CURVE</span><i>+</i><span>BREAKER</span><i>=</i><span>CLEARING</span></div><p>The curve gives device operating time. Total clearing time adds the breaker's mechanical interrupting time — often 3 to 5 cycles. Clearing time is the number that sizes arc-flash energy and proves coordination, so every TCC reading ends with that addition.</p></article><article class="card power-principle"><code>THREE JOBS</code><h3>Overload, selectivity, self-defense</h3><div class="power-flow"><span>L</span><i>&rarr;</i><span>S</span><i>&rarr;</i><span>I</span></div><p>Long-time guards against overheating, short-time buys selectivity with downstream devices, instantaneous protects the breaker itself. Each has its own pickup and delay — set them so the right device clears first.</p></article></div>
+        <div class="depth-grid"><article class="depth-card"><code>LONG-TIME</code><h3>The overload guardian</h3><p>Pickup is set as a multiple of rating — 0.5 to 1.0&times; is typical. Above pickup, an inverse-time curve trips: a little over pickup takes minutes, 6&times; pickup takes seconds. It protects conductors and equipment from overheating, and it must sit above normal load so it never trips on a healthy system.</p></article><article class="depth-card"><code>SHORT-TIME</code><h3>The coordination tool</h3><p>Pickup is typically 1.5 to 10&times; rating with an intentional delay — often 0.1 to 0.5 s, flat or I&sup2;t shaped. The delay lets the downstream device nearest the fault clear first while upstream waits. Set the delay just long enough to coordinate, no longer.</p></article><article class="depth-card"><code>INSTANTANEOUS</code><h3>No intentional delay</h3><p>Pickup is typically 2 to 15&times; rating. Above it the device trips in about 1 to 3 cycles — pure self-protection for high fault current. It overrides everything below it, so check that it doesn't reach into downstream zones and wreck selectivity.</p></article><article class="depth-card"><code>GROUND FAULT</code><h3>Bonus: the fourth function</h3><p>Many trip units add ground-fault protection — the G in LSIG — sensing residual or zero-sequence current with its own pickup and delay. Same curve-reading rules apply; it is just watching a different current.</p></article><article class="depth-card"><code>PICKUP MATH</code><h3>Pickup = setting &times; rating</h3><p>Every function starts from a pickup: the current where timing begins. Long-time 0.8 on a 1200 A frame is a 960 A pickup. Short-time 4&times; is 4800 A. Below pickup the function never times out, no matter how long you wait.</p></article><article class="depth-card"><code>BANDS &amp; MARGINS</code><h3>Curves have tolerances</h3><p>Manufacturer curves are drawn as bands, not lines — the device may trip anywhere inside. Always read the slowest edge for arc-flash work, and keep coordination margins (often 0.2 to 0.3 s or more) between upstream and downstream curves.</p></article></div>
+      </section>
+
+      <section class="panel" id="tcc9-explore" role="tabpanel" aria-labelledby="tab-tcc9-explore">
+        <div class="section-head"><h2>Shape the curve</h2><p>A 1200 A frame breaker, simplified for teaching. Move the pickups and delays — the curve redraws live. Then slide a fault current across it and read the clearing time.</p></div>
+        <div class="tcc-grid">
+          <div class="tcc-wrap">
+            <svg id="tcc9Svg" viewBox="0 0 660 400" role="img" aria-labelledby="tcc9Title tcc9Desc">
+              <title id="tcc9Title">Interactive breaker time-current curve</title><desc id="tcc9Desc">A training TCC with adjustable long-time, short-time, and instantaneous regions. A fault-current marker reads clearing time off the curve.</desc>
+              <g id="tcc9Bands"></g>
+              <g id="tcc9Grid" stroke="currentColor" opacity=".14" stroke-width="1"></g>
+              <g stroke="currentColor" stroke-width="2"><path d="M70 20v300h560"/></g>
+              <g id="tcc9AxisLabels" fill="currentColor" font-family="IBM Plex Mono, monospace" font-size="11" opacity=".68"></g>
+              <path id="tcc9Curve" d="" fill="none" stroke="#ef9b18" stroke-width="3" stroke-linecap="round"/>
+              <g id="tcc9Pickups"></g>
+              <line id="tcc9FaultLine" x1="0" y1="20" x2="0" y2="320" stroke="#d8472f" stroke-width="2" stroke-dasharray="5 5"/>
+              <circle id="tcc9FaultDot" cx="0" cy="0" r="7" fill="#d8472f" stroke="var(--surface)" stroke-width="3"/>
+              <text x="350" y="392" text-anchor="middle" fill="currentColor" font-family="IBM Plex Mono, monospace" font-size="11" opacity=".68">CURRENT (A)</text>
+              <text x="18" y="170" text-anchor="middle" fill="currentColor" font-family="IBM Plex Mono, monospace" font-size="11" opacity=".68" transform="rotate(-90 18 170)">TIME (s)</text>
+            </svg>
+          </div>
+          <div class="tcc-copy">
+            <h3>Dial the trip unit</h3>
+            <p>Watch each region move as you change its pickup. Then run a fault through it.</p>
+            <div class="metric-control"><div class="control-head"><label for="tcc9LtPickup">Long-time pickup</label><span class="control-value" id="tcc9LtPickupVal">0.80 &times;</span></div><input id="tcc9LtPickup" type="range" min="0.5" max="1" step="0.05" value="0.8"></div>
+            <div class="metric-control"><div class="control-head"><label for="tcc9LtDelay">Long-time delay (time at 6&times;)</label><span class="control-value" id="tcc9LtDelayVal">12 s</span></div><input id="tcc9LtDelay" type="range" min="4" max="24" step="1" value="12"></div>
+            <div class="metric-control"><div class="control-head"><label for="tcc9StPickup">Short-time pickup</label><span class="control-value" id="tcc9StPickupVal">4.0 &times;</span></div><input id="tcc9StPickup" type="range" min="2" max="8" step="0.5" value="4"></div>
+            <div class="metric-control"><div class="control-head"><label for="tcc9StDelay">Short-time delay</label><span class="control-value" id="tcc9StDelayVal">0.30 s</span></div><input id="tcc9StDelay" type="range" min="0.1" max="0.5" step="0.05" value="0.3"></div>
+            <div class="metric-control"><div class="control-head"><label for="tcc9InstPickup">Instantaneous pickup</label><span class="control-value" id="tcc9InstPickupVal">8.0 &times;</span></div><input id="tcc9InstPickup" type="range" min="6" max="12" step="0.5" value="8"></div>
+            <div class="metric-control"><div class="control-head"><label for="tcc9Fault">Fault current</label><span class="control-value" id="tcc9FaultVal">8,000 A</span></div><input id="tcc9Fault" type="range" min="0" max="100" step="1" value="62"></div>
+            <div class="readout-row">
+              <div class="readout"><span>LT pickup</span><strong id="tcc9LtAmps">960 A</strong></div>
+              <div class="readout"><span>ST pickup</span><strong id="tcc9StAmps">4,800 A</strong></div>
+              <div class="readout"><span>INST pickup</span><strong id="tcc9InstAmps">9,600 A</strong></div>
+            </div>
+            <div class="readout-row">
+              <div class="readout"><span>Fault region</span><strong id="tcc9Region">Short-time</strong></div>
+              <div class="readout"><span>Device time</span><strong id="tcc9DevTime">0.30 s</strong></div>
+              <div class="readout"><span>Total clearing</span><strong id="tcc9ClearTime">0.35 s</strong></div>
+            </div>
+            <div class="explain">Simplified training model: 1200 A frame, definite-time short-time, 3-cycle (0.05 s) breaker interrupting time added for total clearing. Real studies use exact manufacturer curves, tolerances, and settings.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="tcc9-quiz" role="tabpanel" aria-labelledby="tab-tcc9-quiz">
+        <div class="section-head"><h2>Read it back</h2><p>Six questions on axes, pickups, delays, and clearing time.</p></div>
+        <div class="quiz-shell">
+          <div class="card quiz-card">
+            <div id="tcc9QuestionView">
+              <div class="quiz-kicker" id="tcc9QuizKicker">QUESTION 01 / 06</div>
+              <h3 class="quiz-question" id="tcc9QuestionText"></h3>
+              <div class="answers" id="tcc9Answers"></div>
+              <div class="feedback" id="tcc9Feedback"><strong id="tcc9FeedbackTitle"></strong><p id="tcc9FeedbackText"></p><button class="next-btn" id="tcc9NextBtn">Next question</button></div>
+            </div>
+            <div class="results" id="tcc9Results" hidden>
+              <div class="score-ring" id="tcc9ScoreRing"><strong id="tcc9FinalScore">0/6</strong></div>
+              <h3 id="tcc9ResultTitle">Module complete</h3><p id="tcc9ResultCopy"></p>
+              <button class="restart-btn" id="tcc9RestartBtn">Try again</button>
+            </div>
+          </div>
+          <aside class="card quiz-rail">
+            <h3>Knowledge check</h3>
+            <div class="progress-track"><div class="progress-fill" id="tcc9ProgressFill"></div></div>
+            <div class="quiz-stats"><span id="tcc9AnsweredStat">0 answered</span><span id="tcc9ScoreStat">0 correct</span></div>
+            <div class="dots" id="tcc9Dots" aria-label="TCC quiz progress"></div>
+          </aside>
+        </div>
+      </section>
+      <footer class="sources"><p>This module teaches TCC reading and protection-function concepts with a simplified training curve. Real coordination studies use exact manufacturer time-current characteristics, tolerance bands, and device settings.</p></footer>
     </div>
 
   </main>
@@ -3805,6 +3956,289 @@
         window.scrollTo({ top:document.getElementById('feModule').offsetTop, behavior:'smooth' });
       });
       renderFeSections();
+
+      // Separately derived systems: ground-fault path simulator.
+      var sdsSbj = true, sdsFault = false;
+      var sdsSbjPath = document.getElementById('sdsSbjPath');
+      var sdsFaultPath = document.getElementById('sdsFaultPath');
+      var sdsBreaker = document.getElementById('sdsBreaker');
+      var sdsLoadBlock = document.getElementById('sdsLoadBlock');
+      var sdsLoadPath = document.getElementById('sdsLoadPath');
+      var sdsState = document.getElementById('sdsState');
+      var sdsStateText = document.getElementById('sdsStateText');
+      var sdsSbjOut = document.getElementById('sdsSbjOut');
+      var sdsFaultOut = document.getElementById('sdsFaultOut');
+      var sdsBreakerOut = document.getElementById('sdsBreakerOut');
+      var sdsEnclosureOut = document.getElementById('sdsEnclosureOut');
+      var sdsSbjBtn = document.getElementById('sdsSbjBtn');
+      var sdsFaultBtn = document.getElementById('sdsFaultBtn');
+      var sdsActionNote = document.getElementById('sdsActionNote');
+      function sdsUpdate() {
+        var tripped = sdsFault && sdsSbj;
+        sdsSbjPath.style.display = sdsSbj ? '' : 'none';
+        sdsFaultPath.style.display = sdsFault ? '' : 'none';
+        sdsFaultPath.classList.toggle('live', tripped);
+        sdsBreaker.classList.toggle('live', !tripped);
+        sdsLoadPath.classList.toggle('live', !tripped);
+        sdsLoadBlock.classList.toggle('live', !(tripped || (sdsFault && !sdsSbj)));
+        sdsLoadBlock.classList.toggle('warning', sdsFault && !sdsSbj);
+        sdsSbjBtn.textContent = sdsSbj ? 'Remove bonding jumper' : 'Install bonding jumper';
+        sdsFaultBtn.textContent = sdsFault ? 'Clear ground fault' : 'Apply ground fault';
+        sdsSbjOut.textContent = sdsSbj ? 'Installed' : 'Removed';
+        sdsFaultOut.textContent = sdsFault ? 'Applied at load' : 'None';
+        sdsBreakerOut.textContent = tripped ? 'TRIPPED' : 'Closed';
+        sdsEnclosureOut.textContent = (sdsFault && !sdsSbj) ? 'ENERGIZED 120 V' : 'Safe';
+        if (sdsFault && sdsSbj) {
+          sdsState.dataset.state = 'critical'; sdsStateText.textContent = 'Breaker tripped — fault cleared';
+          sdsActionNote.innerHTML = '<strong>Fault cleared:</strong> current returns to X0 through the EGC and the bonding jumper — a complete circuit. The breaker sees the fault and trips.';
+        } else if (sdsFault && !sdsSbj) {
+          sdsState.dataset.state = 'critical'; sdsStateText.textContent = 'Breaker held — enclosure energized';
+          sdsActionNote.innerHTML = '<strong>Danger:</strong> with no bonding jumper there is no path back to the transformer. The breaker sees almost no current, holds closed, and the enclosure sits at 120 V to ground.';
+        } else if (!sdsSbj) {
+          sdsState.dataset.state = 'warning'; sdsStateText.textContent = 'No fault path — a fault would not clear';
+          sdsActionNote.innerHTML = '<strong>Exposed:</strong> the system runs, but a ground fault right now would have no return path. Install the bonding jumper to restore protection.';
+        } else {
+          sdsState.dataset.state = 'normal'; sdsStateText.textContent = 'System normal';
+          sdsActionNote.innerHTML = '<strong>The one deliberate bond:</strong> the system bonding jumper ties the transformer neutral (X0) to the equipment grounding conductor. Try removing it, then applying a ground fault.';
+        }
+      }
+      sdsSbjBtn.addEventListener('click', function () { sdsSbj = !sdsSbj; sdsUpdate(); });
+      sdsFaultBtn.addEventListener('click', function () { sdsFault = !sdsFault; sdsUpdate(); });
+      sdsUpdate();
+
+      // Separately derived systems quiz.
+      var sdsQuiz = [
+        { q:'Which of these is a separately derived system?', a:['A 480–208Y/120 V transformer secondary','A feeder tapped from a service panel','A branch circuit from a panelboard','A utility service drop'], correct:0, note:'A transformer secondary has no direct conductor connection to the primary system — power crosses by magnetism. Feeders, branch circuits, and services are not separately derived.' },
+        { q:'What does the system bonding jumper connect?', a:['The neutral (grounded conductor) to the equipment grounding conductor','Phase A to the grounding electrode','The neutral to a remote ground rod only','Neutrals from two different systems'], correct:0, note:'The system bonding jumper is the single connection between the system neutral and the EGC — it creates the ground-fault return path.' },
+        { q:'Where is the system bonding jumper installed?', a:['At the source or the first disconnecting means — one location only','At every panelboard','At the load end of each feeder','Anywhere convenient, as many as wanted'], correct:0, note:'NEC 250.30 allows the jumper at the source (transformer or generator) or at the first disconnect — but only one per separately derived system.' },
+        { q:'A ground fault strikes the secondary of a transformer with no system bonding jumper. What happens?', a:['The breaker trips instantly','Almost no fault current flows, so the breaker likely holds and the enclosure stays energized','The transformer primary breaker trips','Nothing — the fault clears itself'], correct:1, note:'Without the jumper there is no complete circuit back to X0. Fault current is near zero, protection cannot see it, and the faulted metal stays at line potential.' },
+        { q:'The grounding electrode conductor for a separately derived system is sized using…', a:['Table 250.66, from the largest ungrounded (phase) conductor','Table 250.122, from the breaker rating','The neutral conductor size','A fixed #6 AWG minimum for everything'], correct:0, note:'The GEC follows Table 250.66 based on the largest derived phase conductor — the same table used for services.' },
+        { q:'The neutral is bonded at both the transformer and the downstream panel. What results?', a:['Better protection','Neutral current splits onto the EGC through parallel paths — objectionable current','Higher system voltage','Nothing changes'], correct:1, note:'Two bonds put the neutral and EGC in parallel. Normal neutral current divides between them — current on the EGC is the textbook "objectionable current" of NEC 250.6.' }
+      ];
+      var sdsQuizIndex = 0, sdsQuizScore = 0, sdsQuizStates = [];
+      var sdsQuestionText = document.getElementById('sdsQuestionText');
+      var sdsAnswers = document.getElementById('sdsAnswers');
+      var sdsFeedback = document.getElementById('sdsFeedback');
+      var sdsNextBtn = document.getElementById('sdsNextBtn');
+      var sdsDots = document.getElementById('sdsDots');
+      function drawSdsDots() {
+        sdsDots.innerHTML = '';
+        sdsQuiz.forEach(function (_, i) {
+          var dot = document.createElement('span');
+          dot.className = 'dot' + (sdsQuizStates[i] === true ? ' good' : sdsQuizStates[i] === false ? ' bad' : i === sdsQuizIndex ? ' current' : '');
+          dot.setAttribute('aria-label', 'Question ' + (i + 1)); sdsDots.appendChild(dot);
+        });
+      }
+      function renderSdsQuestion() {
+        var item = sdsQuiz[sdsQuizIndex];
+        document.getElementById('sdsQuizKicker').textContent = 'QUESTION ' + String(sdsQuizIndex + 1).padStart(2, '0') + ' / 06';
+        sdsQuestionText.textContent = item.q; sdsAnswers.innerHTML = ''; sdsFeedback.classList.remove('show');
+        item.a.forEach(function (text, i) {
+          var button = document.createElement('button'); button.className = 'answer';
+          button.innerHTML = '<span class="letter">' + String.fromCharCode(65 + i) + '</span><span>' + text + '</span>';
+          button.addEventListener('click', function () { chooseSdsAnswer(i); }); sdsAnswers.appendChild(button);
+        });
+        drawSdsDots();
+      }
+      function chooseSdsAnswer(choice) {
+        var item = sdsQuiz[sdsQuizIndex], correct = choice === item.correct;
+        if (correct) sdsQuizScore += 1; sdsQuizStates[sdsQuizIndex] = correct;
+        Array.from(sdsAnswers.children).forEach(function (button, i) {
+          button.disabled = true;
+          if (i === item.correct) button.classList.add('correct'); else if (i === choice) button.classList.add('wrong');
+        });
+        document.getElementById('sdsFeedbackTitle').textContent = correct ? 'Correct.' : 'Not quite.';
+        document.getElementById('sdsFeedbackText').textContent = item.note;
+        sdsNextBtn.textContent = sdsQuizIndex === sdsQuiz.length - 1 ? 'See results' : 'Next question';
+        sdsFeedback.classList.add('show');
+        document.getElementById('sdsAnsweredStat').textContent = sdsQuizStates.length + ' answered';
+        document.getElementById('sdsScoreStat').textContent = sdsQuizScore + ' correct';
+        document.getElementById('sdsProgressFill').style.width = (sdsQuizStates.length / sdsQuiz.length * 100) + '%';
+        drawSdsDots();
+      }
+      sdsNextBtn.addEventListener('click', function () {
+        if (sdsQuizIndex < sdsQuiz.length - 1) { sdsQuizIndex += 1; renderSdsQuestion(); }
+        else {
+          document.getElementById('sdsQuestionView').hidden = true; document.getElementById('sdsResults').hidden = false;
+          document.getElementById('sdsFinalScore').textContent = sdsQuizScore + '/6';
+          document.getElementById('sdsScoreRing').style.setProperty('--score-angle', (sdsQuizScore / 6 * 360) + 'deg');
+          document.getElementById('sdsResultTitle').textContent = sdsQuizScore >= 5 ? 'Bonding path understood' : sdsQuizScore >= 3 ? 'Good first pass' : 'Trace the fault path again';
+          document.getElementById('sdsResultCopy').textContent = sdsQuizScore >= 5 ? 'You can define a separately derived system, place its one bonding jumper, and predict fault behavior with and without it.' : 'Revisit the Explore tab, fault the secondary both ways, then try the questions again.';
+          drawSdsDots();
+        }
+      });
+      document.getElementById('sdsRestartBtn').addEventListener('click', function () {
+        sdsQuizIndex = 0; sdsQuizScore = 0; sdsQuizStates = [];
+        document.getElementById('sdsQuestionView').hidden = false; document.getElementById('sdsResults').hidden = true;
+        document.getElementById('sdsProgressFill').style.width = '0%'; document.getElementById('sdsAnsweredStat').textContent = '0 answered'; document.getElementById('sdsScoreStat').textContent = '0 correct'; renderSdsQuestion();
+      });
+      // TCC curve explorer.
+      var tcc9Frame = 1200, tcc9BreakerTime = 0.05;
+      var tcc9X0 = 70, tcc9X1 = 630, tcc9Y0 = 20, tcc9Y1 = 320;
+      function tcc9X(amps) { return tcc9X0 + ((Math.log(Math.max(100, Math.min(100000, amps))) / Math.LN10 - 2) / 3) * (tcc9X1 - tcc9X0); }
+      function tcc9Y(sec) { var s = Math.max(0.01, Math.min(1000, sec)); return tcc9Y0 + ((3 - Math.log(s) / Math.LN10) / 5) * (tcc9Y1 - tcc9Y0); }
+      function tcc9Settings() {
+        var lt = parseFloat(document.getElementById('tcc9LtPickup').value);
+        var ltd = parseFloat(document.getElementById('tcc9LtDelay').value);
+        var st = parseFloat(document.getElementById('tcc9StPickup').value);
+        var std = parseFloat(document.getElementById('tcc9StDelay').value);
+        var inst = parseFloat(document.getElementById('tcc9InstPickup').value);
+        if (inst < st + 0.5) { inst = st + 0.5; document.getElementById('tcc9InstPickup').value = inst; }
+        return { lt: lt, ltd: ltd, st: st, std: std, inst: inst };
+      }
+      function tcc9Trip(amps, p) {
+        var iLT = p.lt * tcc9Frame, iST = p.st * tcc9Frame, iIN = p.inst * tcc9Frame;
+        if (amps < iLT) return { t: null, region: 'Below pickup' };
+        if (amps < iST) { var m = amps / iLT; return { t: Math.min(1000, p.ltd * 35 / (m * m - 1)), region: 'Long-time' }; }
+        if (amps < iIN) return { t: p.std, region: 'Short-time' };
+        return { t: tcc9BreakerTime, region: 'Instantaneous' };
+      }
+      function tcc9DrawGrid() {
+        var gh = '', lh = '';
+        var xLabels = { 2: '100', 3: '1k', 4: '10k', 5: '100k' };
+        for (var d = 2; d <= 5; d++) {
+          for (var m = 1; m <= 9; m++) {
+            var a = m * Math.pow(10, d);
+            if (a > 100000) break;
+            var x = tcc9X(a);
+            gh += '<path d="M' + x.toFixed(1) + ' ' + tcc9Y0 + 'v' + (tcc9Y1 - tcc9Y0) + '"' + (m === 1 ? ' opacity=".9"' : '') + '/>';
+            if (m === 1) lh += '<text x="' + x.toFixed(1) + '" y="340" text-anchor="middle">' + xLabels[d] + '</text>';
+          }
+        }
+        var yLabels = { '-2': '0.01', '-1': '0.1', '0': '1', '1': '10', '2': '100', '3': '1000' };
+        for (var e = -2; e <= 3; e++) {
+          for (var m2 = 1; m2 <= 9; m2++) {
+            var s = m2 * Math.pow(10, e);
+            if (s > 1000) break;
+            var y = tcc9Y(s);
+            gh += '<path d="M' + tcc9X0 + ' ' + y.toFixed(1) + 'h' + (tcc9X1 - tcc9X0) + '"' + (m2 === 1 ? ' opacity=".9"' : '') + '/>';
+            if (m2 === 1) lh += '<text x="60" y="' + (y + 4).toFixed(1) + '" text-anchor="end">' + yLabels[e] + '</text>';
+          }
+        }
+        document.getElementById('tcc9Grid').innerHTML = gh;
+        document.getElementById('tcc9AxisLabels').innerHTML = lh;
+      }
+      function tcc9FmtA(a) { return a >= 10000 ? (a / 1000).toFixed(a % 1000 ? 1 : 0) + ' kA' : Math.round(a).toLocaleString('en-US') + ' A'; }
+      function tcc9FmtT(t) { return t == null ? '—' : t < 0.1 ? Math.round(t * 1000) + ' ms' : t < 10 ? t.toFixed(2) + ' s' : t < 100 ? t.toFixed(1) + ' s' : Math.round(t) + ' s'; }
+      function tcc9Draw() {
+        var p = tcc9Settings();
+        var iLT = p.lt * tcc9Frame, iST = p.st * tcc9Frame, iIN = p.inst * tcc9Frame;
+        document.getElementById('tcc9Bands').innerHTML =
+          '<rect x="' + tcc9X(iLT).toFixed(1) + '" y="' + tcc9Y0 + '" width="' + (tcc9X(iST) - tcc9X(iLT)).toFixed(1) + '" height="' + (tcc9Y1 - tcc9Y0) + '" fill="#ef9b18" opacity=".06"/>' +
+          '<rect x="' + tcc9X(iST).toFixed(1) + '" y="' + tcc9Y0 + '" width="' + (tcc9X(iIN) - tcc9X(iST)).toFixed(1) + '" height="' + (tcc9Y1 - tcc9Y0) + '" fill="#4da3ff" opacity=".06"/>' +
+          '<rect x="' + tcc9X(iIN).toFixed(1) + '" y="' + tcc9Y0 + '" width="' + (tcc9X1 - tcc9X(iIN)).toFixed(1) + '" height="' + (tcc9Y1 - tcc9Y0) + '" fill="#d8472f" opacity=".07"/>' +
+          '<text x="' + ((tcc9X(iLT) + tcc9X(iST)) / 2).toFixed(1) + '" y="36" text-anchor="middle" font-size="10" fill="#ef9b18" font-family="IBM Plex Mono, monospace">LONG-TIME</text>' +
+          '<text x="' + ((tcc9X(iST) + tcc9X(iIN)) / 2).toFixed(1) + '" y="36" text-anchor="middle" font-size="10" fill="#4da3ff" font-family="IBM Plex Mono, monospace">SHORT-TIME</text>' +
+          '<text x="' + ((tcc9X(iIN) + tcc9X1) / 2).toFixed(1) + '" y="36" text-anchor="middle" font-size="10" fill="#d8472f" font-family="IBM Plex Mono, monospace">INST</text>';
+        document.getElementById('tcc9Pickups').innerHTML = [iLT, iST, iIN].map(function (a) {
+          var x = tcc9X(a).toFixed(1);
+          return '<line x1="' + x + '" y1="' + tcc9Y0 + '" x2="' + x + '" y2="' + tcc9Y1 + '" stroke="#d7ddd5" stroke-width="1.5" stroke-dasharray="4 4" opacity=".5"/>';
+        }).join('');
+        var d = '', first = true;
+        function pt(x, y) { d += (first ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1); first = false; }
+        for (var k = 0; k <= 60; k++) {
+          var I = iLT * 1.002 * Math.pow(iST / (iLT * 1.002), k / 60);
+          pt(tcc9X(I), tcc9Y(tcc9Trip(I, p).t));
+        }
+        pt(tcc9X(iST), tcc9Y(p.std));
+        pt(tcc9X(iIN), tcc9Y(p.std));
+        pt(tcc9X(iIN), tcc9Y(tcc9BreakerTime));
+        pt(tcc9X(100000), tcc9Y(tcc9BreakerTime));
+        document.getElementById('tcc9Curve').setAttribute('d', d);
+        var fv = parseFloat(document.getElementById('tcc9Fault').value);
+        var fA = 300 * Math.pow(200, fv / 100);
+        var fx = tcc9X(fA);
+        var fl = document.getElementById('tcc9FaultLine'), fd = document.getElementById('tcc9FaultDot');
+        fl.setAttribute('x1', fx); fl.setAttribute('x2', fx);
+        var fr = tcc9Trip(fA, p);
+        if (fr.t == null) { fd.style.display = 'none'; }
+        else { fd.style.display = ''; fd.setAttribute('cx', fx); fd.setAttribute('cy', tcc9Y(fr.t)); }
+        document.getElementById('tcc9LtPickupVal').textContent = p.lt.toFixed(2) + ' ×';
+        document.getElementById('tcc9LtDelayVal').textContent = p.ltd + ' s';
+        document.getElementById('tcc9StPickupVal').textContent = p.st.toFixed(1) + ' ×';
+        document.getElementById('tcc9StDelayVal').textContent = p.std.toFixed(2) + ' s';
+        document.getElementById('tcc9InstPickupVal').textContent = p.inst.toFixed(1) + ' ×';
+        document.getElementById('tcc9FaultVal').textContent = tcc9FmtA(fA);
+        document.getElementById('tcc9LtAmps').textContent = tcc9FmtA(iLT);
+        document.getElementById('tcc9StAmps').textContent = tcc9FmtA(iST);
+        document.getElementById('tcc9InstAmps').textContent = tcc9FmtA(iIN);
+        document.getElementById('tcc9Region').textContent = fr.region;
+        document.getElementById('tcc9DevTime').textContent = tcc9FmtT(fr.t);
+        document.getElementById('tcc9ClearTime').textContent = fr.t == null ? '—' : tcc9FmtT(fr.t + tcc9BreakerTime);
+      }
+      ['tcc9LtPickup', 'tcc9LtDelay', 'tcc9StPickup', 'tcc9StDelay', 'tcc9InstPickup', 'tcc9Fault'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', tcc9Draw);
+      });
+      tcc9DrawGrid(); tcc9Draw();
+
+      // TCC quiz.
+      var tcc9Quiz = [
+        { q:'On a TCC plot, what do the axes show?', a:['Current on the horizontal log axis, time on the vertical log axis','Time on the horizontal log axis, current on the vertical log axis','Voltage versus current','Power versus time'], correct:0, note:'TCC = time-current characteristic: current across the bottom (log), time up the side (log). Read across from current, up to the curve, across to time.' },
+        { q:'Long-time pickup primarily protects against…', a:['Overloads that overheat conductors and equipment','High-magnitude short circuits','Ground faults only','Lightning surges'], correct:0, note:'Long-time is overload protection with an inverse-time curve: a little over pickup takes minutes, 6× pickup takes seconds.' },
+        { q:'A 1200 A frame breaker has its long-time pickup set at 0.75. At what current does long-time begin to time out?', a:['900 A','1200 A','750 A','1600 A'], correct:0, note:'Pickup = setting × rating: 0.75 × 1200 A = 900 A. Below that, long-time never starts timing.' },
+        { q:'Why does the short-time function include an intentional delay?', a:['To let the downstream device clear first — selectivity','To save energy','To protect against overloads','To speed up tripping'], correct:0, note:'Short-time delay buys coordination: the downstream breaker closest to the fault clears while the upstream device waits out its set delay.' },
+        { q:'The instantaneous function trips in roughly…', a:['1–3 cycles, with no intentional delay','30 seconds','10 minutes','Exactly 0.5 s always'], correct:0, note:'Instantaneous has no intentional delay — it acts in about 1–3 cycles once current exceeds its pickup.' },
+        { q:'Total clearing time for a fault equals…', a:['Device trip time from the curve plus breaker interrupting time','The long-time delay setting only','Current divided by voltage','The instantaneous pickup value'], correct:0, note:'The curve gives device operating time; add the breaker\u2019s mechanical interrupting time (often ~3–5 cycles) for total clearing — the number that drives arc-flash energy.' }
+      ];
+      var tcc9QuizIndex = 0, tcc9QuizScore = 0, tcc9QuizStates = [];
+      var tcc9QuestionText = document.getElementById('tcc9QuestionText');
+      var tcc9Answers = document.getElementById('tcc9Answers');
+      var tcc9Feedback = document.getElementById('tcc9Feedback');
+      var tcc9NextBtn = document.getElementById('tcc9NextBtn');
+      var tcc9Dots = document.getElementById('tcc9Dots');
+      function drawTcc9Dots() {
+        tcc9Dots.innerHTML = '';
+        tcc9Quiz.forEach(function (_, i) {
+          var dot = document.createElement('span');
+          dot.className = 'dot' + (tcc9QuizStates[i] === true ? ' good' : tcc9QuizStates[i] === false ? ' bad' : i === tcc9QuizIndex ? ' current' : '');
+          dot.setAttribute('aria-label', 'Question ' + (i + 1)); tcc9Dots.appendChild(dot);
+        });
+      }
+      function renderTcc9Question() {
+        var item = tcc9Quiz[tcc9QuizIndex];
+        document.getElementById('tcc9QuizKicker').textContent = 'QUESTION ' + String(tcc9QuizIndex + 1).padStart(2, '0') + ' / 06';
+        tcc9QuestionText.textContent = item.q; tcc9Answers.innerHTML = ''; tcc9Feedback.classList.remove('show');
+        item.a.forEach(function (text, i) {
+          var button = document.createElement('button'); button.className = 'answer';
+          button.innerHTML = '<span class="letter">' + String.fromCharCode(65 + i) + '</span><span>' + text + '</span>';
+          button.addEventListener('click', function () { chooseTcc9Answer(i); }); tcc9Answers.appendChild(button);
+        });
+        drawTcc9Dots();
+      }
+      function chooseTcc9Answer(choice) {
+        var item = tcc9Quiz[tcc9QuizIndex], correct = choice === item.correct;
+        if (correct) tcc9QuizScore += 1; tcc9QuizStates[tcc9QuizIndex] = correct;
+        Array.from(tcc9Answers.children).forEach(function (button, i) {
+          button.disabled = true;
+          if (i === item.correct) button.classList.add('correct'); else if (i === choice) button.classList.add('wrong');
+        });
+        document.getElementById('tcc9FeedbackTitle').textContent = correct ? 'Correct.' : 'Not quite.';
+        document.getElementById('tcc9FeedbackText').textContent = item.note;
+        tcc9NextBtn.textContent = tcc9QuizIndex === tcc9Quiz.length - 1 ? 'See results' : 'Next question';
+        tcc9Feedback.classList.add('show');
+        document.getElementById('tcc9AnsweredStat').textContent = tcc9QuizStates.length + ' answered';
+        document.getElementById('tcc9ScoreStat').textContent = tcc9QuizScore + ' correct';
+        document.getElementById('tcc9ProgressFill').style.width = (tcc9QuizStates.length / tcc9Quiz.length * 100) + '%';
+        drawTcc9Dots();
+      }
+      tcc9NextBtn.addEventListener('click', function () {
+        if (tcc9QuizIndex < tcc9Quiz.length - 1) { tcc9QuizIndex += 1; renderTcc9Question(); }
+        else {
+          document.getElementById('tcc9QuestionView').hidden = true; document.getElementById('tcc9Results').hidden = false;
+          document.getElementById('tcc9FinalScore').textContent = tcc9QuizScore + '/6';
+          document.getElementById('tcc9ScoreRing').style.setProperty('--score-angle', (tcc9QuizScore / 6 * 360) + 'deg');
+          document.getElementById('tcc9ResultTitle').textContent = tcc9QuizScore >= 5 ? 'Curve reader' : tcc9QuizScore >= 3 ? 'Good first pass' : 'Trace the curve again';
+          document.getElementById('tcc9ResultCopy').textContent = tcc9QuizScore >= 5 ? 'You can read axes, compute pickups, explain each protection function, and build a total clearing time.' : 'Revisit the Explore tab, move each pickup, then try the questions again.';
+          drawTcc9Dots();
+        }
+      });
+      document.getElementById('tcc9RestartBtn').addEventListener('click', function () {
+        tcc9QuizIndex = 0; tcc9QuizScore = 0; tcc9QuizStates = [];
+        document.getElementById('tcc9QuestionView').hidden = false; document.getElementById('tcc9Results').hidden = true;
+        document.getElementById('tcc9ProgressFill').style.width = '0%'; document.getElementById('tcc9AnsweredStat').textContent = '0 answered'; document.getElementById('tcc9ScoreStat').textContent = '0 correct'; renderTcc9Question();
+      });
+      renderTcc9Question();
+      renderSdsQuestion();
     })();
   </script>
 </body>
