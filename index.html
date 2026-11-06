@@ -124,6 +124,16 @@
     .callout strong { display: block; margin-bottom: 3px; }
     .callout p { margin: 0; color: var(--muted); font-size: 14px; }
     .sim-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 18px; align-items: start; }
+    .sim-toolbar { display: flex; justify-content: flex-end; margin: 0 0 10px; }
+    .present-btn { background: #1f4e79; color: #fff; border: 0; border-radius: 999px; padding: 10px 18px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .present-btn:hover { background: #2e74b5; }
+    .present-close { display: none; }
+    body.presenting { overflow: hidden; }
+    body.presenting .sim-grid { position: fixed; inset: 0; z-index: 9990; background: #0c1220; padding: 28px; overflow: auto; align-content: center; }
+    body.presenting .present-close { display: block; position: fixed; top: 16px; right: 16px; z-index: 9999; background: #fff; color: #14213d; border: 0; border-radius: 999px; padding: 10px 18px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+    body.presenting .energy-reading output { font-size: clamp(56px, 8vw, 96px); }
+    body.presenting .controls label, body.presenting .control-value { font-size: 16px; }
+    body.presenting input[type="range"] { height: 34px; cursor: pointer; }
     .viz { min-height: 530px; position: relative; overflow: hidden; padding: 22px; background: #101410; color: #f7f2e3; border-color: #303a31; }
     .viz-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; position: relative; z-index: 3; }
     .viz-top > div:first-child { flex:1; min-width:0; }
@@ -1184,6 +1194,8 @@
         <div class="guide-step"><span>02</span><strong>Change one variable</strong><p>Move time or distance alone so you can see its effect clearly.</p></div>
         <div class="guide-step"><span>03</span><strong>Explain the result</strong><p>Use the equation and device curve—not the animation—to justify the trend.</p></div>
       </div>
+      <div class="sim-toolbar"><button class="present-btn" id="presentBtn" type="button">Present this visual (full screen)</button></div>
+      <button class="present-close" id="presentClose" type="button">Exit presentation ✕</button>
       <div class="sim-grid">
         <div class="card viz" aria-label="Interactive arc flash scene">
           <div class="viz-top">
@@ -2577,6 +2589,30 @@
       }
       [baseline, cycles, distance].forEach(function (el) { el.addEventListener('input', updateSim); });
       updateSim();
+
+      var presentBtn = document.getElementById('presentBtn');
+      var presentClose = document.getElementById('presentClose');
+      var simGrid = document.querySelector('.sim-grid');
+      function enterPresent() {
+        document.body.classList.add('presenting');
+        if (simGrid && simGrid.requestFullscreen) {
+          var p = simGrid.requestFullscreen();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+      function exitPresent() {
+        document.body.classList.remove('presenting');
+        if (document.fullscreenElement) {
+          var p = document.exitFullscreen();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+      if (presentBtn) presentBtn.addEventListener('click', enterPresent);
+      if (presentClose) presentClose.addEventListener('click', exitPresent);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') exitPresent(); });
+      document.addEventListener('fullscreenchange', function () {
+        if (!document.fullscreenElement) document.body.classList.remove('presenting');
+      });
 
       var current = document.getElementById('current');
       var tccLine = document.getElementById('tccLine');
