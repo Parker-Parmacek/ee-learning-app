@@ -2052,10 +2052,11 @@
       </header>
 
       <div class="tabs-wrap">
-        <nav class="tabs" role="tablist" aria-label="UPS module sections" style="--tab-count:3">
+        <nav class="tabs" role="tablist" aria-label="UPS module sections" style="--tab-count:4">
           <button class="tab" id="tab-ups-learn" role="tab" aria-controls="ups-learn" aria-selected="true" data-panel="ups-learn">01 / LEARN</button>
           <button class="tab" id="tab-ups-operate" role="tab" aria-controls="ups-operate" aria-selected="false" data-panel="ups-operate">02 / OPERATE</button>
-          <button class="tab" id="tab-ups-size" role="tab" aria-controls="ups-size" aria-selected="false" data-panel="ups-size">03 / SIZE</button>
+          <button class="tab" id="tab-ups-batteries" role="tab" aria-controls="ups-batteries" aria-selected="false" data-panel="ups-batteries">03 / BATTERIES</button>
+          <button class="tab" id="tab-ups-size" role="tab" aria-controls="ups-size" aria-selected="false" data-panel="ups-size">04 / SIZE</button>
         </nav>
       </div>
 
@@ -2098,6 +2099,37 @@
             <div class="card system-guide"><h3>Stress the system</h3><p>Runtime is an educational energy estimate; actual selection requires manufacturer battery data.</p><div class="metric-stack"><div class="metric-control"><div class="control-head"><label for="upsLoadRange">UPS load</label><span class="control-value" id="upsLoadValue">60%</span></div><input id="upsLoadRange" type="range" min="20" max="120" step="5" value="60"></div><div class="metric-control"><div class="control-head"><label for="upsBatteryRange">Battery health</label><span class="control-value" id="upsBatteryValue">100%</span></div><input id="upsBatteryRange" type="range" min="50" max="100" step="5" value="100"></div></div><div class="system-note" id="upsStressNote"><strong>Headroom available:</strong> the load is below both the 450 kW and 500 kVA frame limits.</div></div>
           </aside>
         </div>
+      </section>
+
+      <section class="panel" id="ups-batteries" role="tabpanel" aria-labelledby="tab-ups-batteries">
+        <div class="section-head"><h2>House the stored energy</h2><p>Small UPS frames hide their batteries inside the electronics cabinet. As ratings grow, the battery plant becomes a system of its own: series strings in cabinets, a DC disconnect, monitoring, ventilation, and serious floor loading. It is also the part of the UPS that ages, gets serviced, and gets replaced.</p></div>
+        <div class="system-grid">
+          <article class="card system-board">
+            <div class="system-board-head"><div><h3>Battery cabinet plant</h3><p>Illustrative plant · 12 V blocks · one string per cabinet</p></div><div class="system-state" id="cabState" data-state="normal" aria-live="polite"><span>CHEMISTRY</span><strong id="cabStateText">VRLA · AGM</strong></div></div>
+            <svg class="power-one-line" viewBox="0 0 820 360" role="img" aria-labelledby="cabLineTitle cabLineDesc">
+              <title id="cabLineTitle">Battery cabinets feeding a UPS DC bus</title><desc id="cabLineDesc">One to four battery cabinets, each holding one series string of 12 volt blocks, paralleled onto a common DC bus with a disconnect at each cabinet.</desc>
+              <path d="M40 60 H770" class="path live"/>
+              <rect x="770" y="38" width="10" height="44" fill="#d7dbd2"/>
+              <g class="small-label"><text x="796" y="30" style="text-anchor:end">DC BUS · TO UPS</text><text x="24" y="30" style="text-anchor:start">BLOCKS SHOWN SCHEMATICALLY</text></g>
+              <line x1="40" y1="318" x2="780" y2="318" stroke="#697169" stroke-width="2"/>
+              <g id="cabCabinets"></g>
+            </svg>
+            <div class="power-readouts" aria-live="polite"><div class="power-readout"><span>String voltage</span><strong id="cabVoltOut">480 V nominal</strong></div><div class="power-readout"><span>Float voltage</span><strong id="cabFloatOut">545 V</strong></div><div class="power-readout"><span>Plant energy</span><strong id="cabEnergyOut">96 kWh</strong></div><div class="power-readout"><span>Total blocks</span><strong id="cabCountOut">80</strong></div></div>
+          </article>
+          <aside class="system-side">
+            <div class="card system-controls"><h3>Build the string</h3><p>Series blocks set the voltage. Parallel strings add capacity, not voltage.</p><div class="metric-stack"><div class="metric-control"><div class="control-head"><label for="cabBlocksRange">Blocks per string · 12 V each</label><span class="control-value" id="cabBlocksValue">40</span></div><input id="cabBlocksRange" type="range" min="32" max="44" step="1" value="40"></div><div class="metric-control"><div class="control-head"><label for="cabStringsRange">Parallel strings · one per cabinet</label><span class="control-value" id="cabStringsValue">2</span></div><input id="cabStringsRange" type="range" min="1" max="4" step="1" value="2"></div></div><div class="system-note" id="cabStringNote"></div></div>
+            <div class="card system-guide"><h3>Pick a chemistry</h3><p>Same cabinets, very different ownership. Figures are typical published ranges, not a selection.</p><div class="mode-buttons" role="group" aria-label="Battery chemistry"><button class="mode-button cab-chem" type="button" data-chem="vrla" aria-pressed="true">VRLA</button><button class="mode-button cab-chem" type="button" data-chem="flooded" aria-pressed="false">FLOODED</button><button class="mode-button cab-chem" type="button" data-chem="lithium" aria-pressed="false">LITHIUM</button></div><div class="system-note" id="cabChemNote"></div></div>
+          </aside>
+        </div>
+        <div class="depth-grid">
+          <article class="depth-card"><code>WHERE BATTERIES LIVE</code><h3>Internal, cabinet, or rack</h3><p>Small frames carry batteries inside the UPS cabinet. Mid-size plants use matching battery cabinets in the row: factory-wired, front access, commonly one string per cabinet. The largest plants move to open racks in a dedicated battery room, where flooded cells, spill containment, and eyewash enter the design.</p></article>
+          <article class="depth-card"><code>STRINGS</code><h3>Series for voltage, parallel for time</h3><p>Blocks in series add voltage until the string matches the UPS DC bus; strings in parallel add amp-hours and runtime. Parallel strings never share current perfectly, and one failed block can silently take its whole string out of service. That is why string-level disconnects and monitoring exist.</p></article>
+          <article class="depth-card"><code>DC DISCONNECT</code><h3>The battery needs its own switch</h3><p>Each cabinet or string gets a DC-rated breaker or disconnect so the plant can be serviced and the DC cables protected. Battery short-circuit current runs to thousands of amps, and a DC arc has no zero crossing to help it go out. AC-rated hardware does not belong here.</p></article>
+          <article class="depth-card"><code>VENTILATION</code><h3>Lead-acid breathes hydrogen</h3><p>Charging lead-acid cells release hydrogen: flooded cells the most, VRLA far less because it recombines gas internally, but not zero under overcharge or fault. Ventilation design keeps hydrogen well under its 4% lower explosive limit, conventionally at or below 1%. Lithium cabinets skip the hydrogen and add thermal-runaway venting to the review instead.</p></article>
+          <article class="depth-card"><code>TEMPERATURE</code><h3>Heat is a life sentence</h3><p>VRLA life is rated at 25 °C (77 °F) and roughly halves for every 10 °C of sustained heat above that. A cabinet baking at 35 °C can turn a 10-year battery into a 5-year battery. Cold trades the other way: capacity drops while the battery is cold, but life is not harmed.</p></article>
+          <article class="depth-card"><code>MONITORING</code><h3>Find the one bad block first</h3><p>Most string failures start as a single block drifting: rising impedance, falling voltage, running hot. Per-block monitoring and IEEE 1188 (VRLA) or IEEE 450 (flooded) maintenance routines catch it during a routine inspection instead of during the outage the battery exists for. Lithium cabinets fold the same job into the BMS.</p></article>
+        </div>
+        <aside class="callout"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 21h22L12 2Zm1 14h-2V9h2v7Zm0 3h-2v-2h2v2Z"/></svg><div><strong>The codes follow the cabinet</strong><p>NEC Article 480 covers stationary storage batteries and NEC 706 covers energy storage systems; NFPA 855 thresholds can pull a larger lithium installation into ESS rules, and the AHJ decides where a UPS battery stops being an appliance battery. The assembly itself rides on UL 1778 (UPS) and UL 1973 (batteries). Final design always runs through the manufacturer data and the AHJ.</p></div></aside>
       </section>
 
       <section class="panel" id="ups-size" role="tabpanel" aria-labelledby="tab-ups-size">
@@ -3617,6 +3649,60 @@
       }
       upsSizingInputs.forEach(function (input) { input.addEventListener('input', updateUpsSizing); });
       updateUpsSizing();
+
+      // UPS battery cabinets: string builder + chemistry picker.
+      var cabBlocksRange = document.getElementById('cabBlocksRange');
+      var cabStringsRange = document.getElementById('cabStringsRange');
+      var cabChemData = {
+        vrla: { label: 'VRLA · AGM', note: '<strong>The cabinet default:</strong> sealed valve-regulated blocks, no watering, and very little gas under normal float. Typical design life is 5 to 10 years at 25 °C, and heat is the silent killer: sustained operation about 10 °C above rating roughly halves life. Watch for dry-out and a single block drifting; per-block monitoring earns its keep.' },
+        flooded: { label: 'Flooded · vented', note: '<strong>The battery-room classic:</strong> vented cells with liquid electrolyte, design life up to 20 years, and the lowest cost per amp-hour at large scale. In exchange you get watering and specific-gravity checks, real hydrogen ventilation, spill containment, and usually open racks in a dedicated room rather than cabinets.' },
+        lithium: { label: 'Lithium-ion · LFP', note: '<strong>The density play:</strong> lithium iron phosphate cabinets deliver similar energy in roughly half the footprint and weight of VRLA, with 10 to 15 year design life and a battery management system watching every cell. Higher first cost, no hydrogen in normal operation, but thermal-runaway protection, UL 9540A test data, and NFPA 855 can enter the conversation with the AHJ.' }
+      };
+      var cabChem = 'vrla';
+      function drawCabCabinets(count, blocks) {
+        var g = document.getElementById('cabCabinets');
+        if (!g) return;
+        var w = 150, gap = 30, total = count * w + (count - 1) * gap;
+        var x0 = (820 - total) / 2, top = 96, h = 222;
+        var html = '';
+        for (var i = 0; i < count; i++) {
+          var x = x0 + i * (w + gap);
+          html += '<rect x="' + x + '" y="' + top + '" width="' + w + '" height="' + h + '" fill="#272d28" stroke="#d7dbd2" stroke-width="2.5"/>';
+          for (var r = 0; r < 4; r++) {
+            for (var c = 0; c < 5; c++) {
+              html += '<rect x="' + (x + 12 + c * 26) + '" y="' + (top + 16 + r * 46) + '" width="22" height="34" fill="#3d4a41" stroke="#8fa393" stroke-width="1"/>';
+            }
+            html += '<line x1="' + (x + 6) + '" y1="' + (top + 56 + r * 46) + '" x2="' + (x + w - 6) + '" y2="' + (top + 56 + r * 46) + '" stroke="#697169" stroke-width="2"/>';
+          }
+          html += '<rect x="' + (x + w / 2 - 16) + '" y="66" width="32" height="30" fill="#171a17" stroke="#d7dbd2" stroke-width="2"/>';
+          html += '<line x1="' + (x + w / 2) + '" y1="66" x2="' + (x + w / 2) + '" y2="60" stroke="#d7dbd2" stroke-width="2"/>';
+          html += '<text x="' + (x + w / 2) + '" y="' + (top + h + 24) + '" text-anchor="middle" fill="#d7dbd2" font-size="13" font-weight="700">STRING ' + 'ABCD'[i] + ' · ' + blocks + ' BLOCKS</text>';
+        }
+        g.innerHTML = html;
+      }
+      function renderCab() {
+        if (!cabBlocksRange) return;
+        var blocks = parseInt(cabBlocksRange.value, 10);
+        var strings = parseInt(cabStringsRange.value, 10);
+        var volts = blocks * 12;
+        var floatV = Math.round(blocks * 13.62);
+        var endV = Math.round(blocks * 10.5);
+        var energy = Math.round(volts * 100 * strings / 1000);
+        document.getElementById('cabBlocksValue').textContent = blocks;
+        document.getElementById('cabStringsValue').textContent = strings;
+        document.getElementById('cabVoltOut').textContent = volts + ' V nominal';
+        document.getElementById('cabFloatOut').textContent = floatV + ' V';
+        document.getElementById('cabEnergyOut').textContent = energy + ' kWh';
+        document.getElementById('cabCountOut').textContent = blocks * strings;
+        document.getElementById('cabStringNote').innerHTML = '<strong>Series sets voltage:</strong> ' + blocks + ' blocks × 12 V = ' + volts + ' V nominal, floating near ' + floatV + ' V. At end of discharge (1.75 V per cell) the string falls to about ' + endV + ' V, and the inverter DC window has to swallow that whole swing. With 100 Ah blocks, ' + strings + (strings === 1 ? ' string' : ' parallel strings') + ' ≈ ' + energy + ' kWh of nameplate energy.';
+        drawCabCabinets(strings, blocks);
+      }
+      if (cabBlocksRange) {
+        [cabBlocksRange, cabStringsRange].forEach(function (input) { input.addEventListener('input', renderCab); });
+        document.querySelectorAll('.cab-chem').forEach(function (button) { button.addEventListener('click', function () { cabChem = button.dataset.chem; document.querySelectorAll('.cab-chem').forEach(function (item) { item.setAttribute('aria-pressed', item === button ? 'true' : 'false'); }); document.getElementById('cabStateText').textContent = cabChemData[cabChem].label; document.getElementById('cabChemNote').innerHTML = cabChemData[cabChem].note; }); });
+        document.getElementById('cabChemNote').innerHTML = cabChemData.vrla.note;
+        renderCab();
+      }
 
       // ATS source-transfer sequence.
       var atsFlow = 'normal';
